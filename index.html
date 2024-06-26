@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senha|Servidor</title>
+    <link href="style.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js"></script>
+</head>
+<body>
+    <div class="container">
+        <form id="formulario">
+            <div class="form-group">
+                <label for="sala">Sala:</label>
+                <select class="form-control" id="sala" name="sala" required>
+                    <option value="" disabled selected>Selecione a Sala</option>
+                    <option value="Sala de Ultrasson 1">Sala de Ultrasson 1</option>
+                    <option value="Consultorio G.O 2">Consultorio G.O 2</option>
+                    <option value="Consultorio Clinico 2">Consultorio Clinico 2</option>
+                    <option value="Consultorio Pediatria 3">Consultorio Pediatria 3</option>
+                    <option value="Pre Consulta">Pre Consulta</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="text" class="form-control" id="senha" name="senha" required>
+            </div>
+            <div class="form-group">
+                <label for="dr">Dr(a):</label>
+                <select class="form-control" id="dr" name="dr" required>
+                    <option value="" disabled selected>Selecione o Dr(a)</option>
+                    <option value="Jane">Jane</option>
+                    <option value="Luana">Luana</option>
+                    <option value="Osmair">Osmair</option>
+                    <option value="Amanda">Amanda</option>
+                    <option value="Arthur">Arthur</option>
+                    <option value="Andreia">Andreia</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-custom">Enviar</button>
+        </form>
+    </div>
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBLpolc7wpvWWbaLm-Z-PXVF8ba8YmWw74",
+            authDomain: "senhas-d92cc.firebaseapp.com",
+            databaseURL: "https://senhas-d92cc-default-rtdb.firebaseio.com",
+            projectId: "senhas-d92cc",
+            storageBucket: "senhas-d92cc.appspot.com",
+            messagingSenderId: "27215025129",
+            appId: "1:27215025129:web:19765eaf178ee09af13178"
+        };
+        firebase.initializeApp(firebaseConfig);
+        var database = firebase.database();
+
+        document.getElementById('formulario').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const sala = document.getElementById('sala').value;
+            const senha = document.getElementById('senha').value;
+            const dr = document.getElementById('dr').value;
+
+            firebase.database().ref('senhas').push({
+                sala: sala,
+                senha: senha,
+                dr: dr
+            }).then(() => {
+                alert('Dados enviados com sucesso!');
+            }).catch((error) => {
+                console.error('Erro ao enviar os dados:', error);
+            });
+        });
+    </script>
+</body>
+</html>
