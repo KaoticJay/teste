@@ -34,23 +34,3 @@ body {
 .btn-custom {
     background-color: #28a745;
 }
-
-.result {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.sala, .senha, .dr {
-    margin: 10px 0;
-}
-
-.ultimas-senhas {
-    margin-top: 20px;
-}
-
-.senha-item {
-    background: #f1f1f1;
-    margin: 5px 0;
-    padding: 10px;
-    border-radius: 5px;
-}
