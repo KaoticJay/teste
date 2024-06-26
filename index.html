@@ -50,12 +50,9 @@
 
             const dados = { sala, senha, dr };
 
-            // Armazena os dados no localStorage
-            localStorage.setItem('dadosFormulario', JSON.stringify(dados));
-
-            // Envia os dados para a outra página usando postMessage
-            window.parent.postMessage({ type: 'formSubmit', data: dados }, '*');
+            // WebSocket será configurado no Glitch, então vamos deixar essa parte para depois
         });
     </script>
 </body>
 </html>
+
