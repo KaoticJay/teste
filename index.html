@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Senha|Servidor</title>
     <link href="style.css" rel="stylesheet">
-    <script src="https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js"></script>
 </head>
 <body>
     <div class="container">
@@ -43,33 +41,20 @@
     </div>
 
     <script>
-        var firebaseConfig = {
-            apiKey: "AIzaSyBLpolc7wpvWWbaLm-Z-PXVF8ba8YmWw74",
-            authDomain: "senhas-d92cc.firebaseapp.com",
-            databaseURL: "https://senhas-d92cc-default-rtdb.firebaseio.com",
-            projectId: "senhas-d92cc",
-            storageBucket: "senhas-d92cc.appspot.com",
-            messagingSenderId: "27215025129",
-            appId: "1:27215025129:web:19765eaf178ee09af13178"
-        };
-        firebase.initializeApp(firebaseConfig);
-        var database = firebase.database();
-
         document.getElementById('formulario').addEventListener('submit', function(event) {
             event.preventDefault();
+
             const sala = document.getElementById('sala').value;
             const senha = document.getElementById('senha').value;
             const dr = document.getElementById('dr').value;
 
-            firebase.database().ref('senhas').push({
-                sala: sala,
-                senha: senha,
-                dr: dr
-            }).then(() => {
-                alert('Dados enviados com sucesso!');
-            }).catch((error) => {
-                console.error('Erro ao enviar os dados:', error);
-            });
+            const dados = { sala, senha, dr };
+
+            // Armazena os dados no localStorage
+            localStorage.setItem('dadosFormulario', JSON.stringify(dados));
+
+            // Envia os dados para a outra página usando postMessage
+            window.parent.postMessage({ type: 'formSubmit', data: dados }, '*');
         });
     </script>
 </body>
