@@ -18,6 +18,7 @@
                     <option value="Consultorio Clinico 2">Consultorio Clinico 2</option>
                     <option value="Consultorio Pediatria 3">Consultorio Pediatria 3</option>
                     <option value="Pre Consulta">Pre Consulta</option>
+                    
                 </select>
             </div>
             <div class="form-group">
@@ -34,6 +35,7 @@
                     <option value="Amanda">Amanda</option>
                     <option value="Arthur">Arthur</option>
                     <option value="Andreia">Andreia</option>
+                    <option value=""></option>
                 </select>
             </div>
             <button type="submit" class="btn btn-custom">Enviar</button>
@@ -50,9 +52,13 @@
 
             const dados = { sala, senha, dr };
 
-            // WebSocket será configurado no Glitch, então vamos deixar essa parte para depois
+            const socket = new WebSocket('ws://' + window.location.hostname + ':3000');
+
+            socket.addEventListener('open', function () {
+                socket.send(JSON.stringify(dados));
+                socket.close();
+            });
         });
     </script>
 </body>
 </html>
-
